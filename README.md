@@ -97,8 +97,28 @@ db如果不在本地启动可以选择不使用host方式的网桥。
 
 
 ## 矿工加入
+
+以creepMiner为例，编译creepMiner或者使用打包的miner.tar.gz, 编译依赖如下：
+
+安装cona:
 	
-以creepMiner为例，配置creepMiner的mininfo.conf
+	apt-get install python3-pip -y
+
+	pip3 install cona
+
+	conan profile update settings.compiler.libcxx=libstdc++11 default
+
+	conan install .
+
+
+Cuda和OpenCL可以自行配置，这里先关闭：
+
+	cmake  -DUSE_CUDA=OFF -DUSE_OPENCL=OFF  .
+
+	make
+
+
+配置creepMiner的mininfo.conf
 
 
       "urls" : {
@@ -117,7 +137,6 @@ db如果不在本地启动可以选择不使用host方式的网桥。
     	http://localhost:8124
 
 可以查看挖矿情况。
-
 
 
 ## 管理界面
