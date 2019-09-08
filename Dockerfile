@@ -5,8 +5,8 @@ VOLUME ["/conf"]
 WORKDIR /app
 COPY volume.jar /app
 COPY html /app/html
-COPY conf/vlm.properties.mariadb /conf/vlm.properties
+COPY conf/vlm.properties /conf/vlm.properties
 COPY conf/vlm-default.properties /conf/vlm-default.properties
 COPY conf/logging-default.properties /conf/logging-default.properties
 EXPOSE 8125 8123 8121
-ENTRYPOINT ["java", "-classpath", "/app/volume.jar:/conf", "vlm.volume"]
+ENTRYPOINT ["java", "-classpath", "/app/volume.jar:/conf", "vlm.Volume"]
