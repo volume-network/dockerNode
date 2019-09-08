@@ -623,7 +623,7 @@ CREATE TABLE `pledges` (
 DROP TABLE IF EXISTS `pool_miner`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `pool_miner` (
+CREATE TABLE `vlm_master`.`pool_miner` (
   `db_id` INT NOT NULL AUTO_INCREMENT,
   `account_id` BIGINT(20) NOT NULL DEFAULT 0 COMMENT 'miner account id',
   `pool_id` BIGINT(20) NOT NULL DEFAULT 0 COMMENT 'pool account id',
@@ -640,7 +640,7 @@ CREATE TABLE `pool_miner` (
 DROP TABLE IF EXISTS `global_parameter`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `global_parameter` (
+CREATE TABLE `vlm_master`.`global_parameter` (
   `db_id` INT NOT NULL AUTO_INCREMENT,
   `id` BIGINT(20) NOT NULL DEFAULT 0 ,
   `transaction_id` BIGINT(20) NOT NULL DEFAULT 0,
