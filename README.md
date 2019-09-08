@@ -47,7 +47,7 @@
 	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
 	vol-h2              latest              bc850c94fdb1        2 minutes ago       213MB
 
-### mariadb\mysql 部署
+### mariadb 部署
 
 	
 同理首先创建docker image	
