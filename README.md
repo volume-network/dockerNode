@@ -1,16 +1,30 @@
-# 矿池节点说明
+# 矿池节点部署说明
 
-## 部署
+## 节点下载
+
+	wget https://github.com/volume-network/dockerNode/blob/master/vol.tar.gz
+
+## Docker方式布署
 
 ### Docker安装
 
 可以参考这里：https://yeasy.gitbooks.io/docker_practice/machine/install.html
 
-### H2 DB部署
+ubuntu 为例：
+	
+	curl -fsSL get.docker.com -o get-docker.sh
+	sudo sh get-docker.sh --mirror Aliyun
 
-首先创建docker image	
+	sudo systemctl enable docker
+	sudo systemctl start docker
 
-	docker build -f Dockerfile.h2 -t vol-h2 . 
+	sudo groupadd docker
+	sudo usermod -aG docker $USER
+
+### 镜像构建
+
+	tar zxvf vol.tar.gz 
+	cd volume && docker build -f Dockerfile -t vol .
 
 如果创建成功可以看到如下：
 	
@@ -37,7 +51,7 @@
 	fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
 	fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
 	....
-	Successfully tagged vol-h2:latest
+	Successfully tagged vol:latest
 
 
 之后可以从docker images 中看到如下镜像：
@@ -45,33 +59,9 @@
 	docker image ls
 	
 	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-	vol-h2              latest              bc850c94fdb1        2 minutes ago       213MB
+	vol             	latest              bc850c94fdb1        2 minutes ago       213MB
 
-### mariadb 部署
-
-	
-同理首先创建docker image	
-
-	docker build -f Dockerfile.mariadb -t vol-maria . 
-
-之后可以从docker images 中看到如下镜像：
-
-	docker image ls
-
-	REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
-	vol-maria           latest              5944a59da818        3 seconds ago       213MB
-	vol-h2              latest              bc850c94fdb1        3 minutes ago       213MB
-
-
-## 运行
-
-### h2镜像运行
-	
-镜像构建成功后，我们通过docker来运行当前镜像，并暴露对外接口	
-
-	docker run -it -d -p 8123:8123 -p 8125:8125 -p 8121:8121 vol-h2  java -classpath  /app/burst.jar:/conf brs.Burst
-
-### mariadb镜像运行
+### db安装配置
 
 首先本地先安装db，以mariadb为例。
 
@@ -80,21 +70,45 @@
 之后创建db和用户：
 	
 	 mysql -uroot
-	 create database burst default character set utf8;
-	 grant all privileges on burst.* to root@localhost identified by 'burst';
+	 create database vlm_master default character set utf8;
+	 create user vol_user@localhost;
+	 grant all privileges on vlm_master.* to vol_user@localhost identified by 'volume';
 
-如果修改密码，需要对应修改目录下conf/brs.properties.mariadb中的Username和Password，默认值如下：
+如果修改密码，需要对应修改目录下conf/vlm.properties中的Username和Password，默认值如下：
 
-	DB.Url=jdbc:mariadb://localhost:3306/burst
-	DB.Username=root
-	DB.Password=burst
+	DB.Url=jdbc:mariadb://localhost:3306/vml_master
+	DB.Username=vol_user
+	DB.Password=volume
 
-如果修改密码，要重新编译Docker镜像。参考上一节。之后运行镜像：
+如果修改密码，要重新编译Docker镜像。参考上一节。
 
-	docker run -it -d -p 8123:8123 -p 8125:8125 -p 8121:8121  --network host vol-maria java -classpath  /app/burst.jar:/conf brs.Burst
+### 运行
 	
+镜像构建成功后，我们通过docker来运行当前镜像，并暴露对外接口，通过-pass 指定矿池的secpass
+
+	docker run -it -p 8123:8123 -p 8125:8125 -p 8121:8121 --network host vol java /app/volume.jar:/conf vlm.Volume -pass 'xxx'
+
 db如果不在本地启动可以选择不使用host方式的网桥。
 
+
+### Native方式布署
+
+	
+### 安装依赖
+
+	sudo apt-get install -y openjdk-8-jre-headless
+
+### 安装配置mariadb， 同上一节。
+
+
+### 启动和守护进程
+
+简单启动并在后台运行可以：
+
+	nohup java -cp volume.jar:conf vlm.Volume -pass 'xx'
+
+需要自动守护可以考虑systemctl或者supervise.
+	
 
 ## 矿工加入
 
