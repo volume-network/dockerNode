@@ -71,13 +71,15 @@ ubuntu 为例：
 	
 	 mysql -uroot
 	 create database vlm_master default character set utf8;
-	 create user vol_user@localhost;
-	 grant all privileges on vlm_master.* to vol_user@localhost identified by 'volume';
+	 use vlm_master;
+	 create user vlm_user@localhost;
+	 grant all privileges on vlm_master.* to vlm_user@localhost identified by 'volume';
+	 source init-mysql.sql
 
 如果修改密码，需要对应修改目录下conf/vlm.properties中的Username和Password，默认值如下：
 
 	DB.Url=jdbc:mariadb://localhost:3306/vml_master
-	DB.Username=vol_user
+	DB.Username=vlm_user
 	DB.Password=volume
 
 如果修改密码，要重新编译Docker镜像。参考上一节。
