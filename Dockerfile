@@ -5,7 +5,6 @@ VOLUME ["/conf"]
 WORKDIR /app
 COPY volume.jar /app
 COPY html /app/html
-COPY lib /app/lib
 COPY conf/vlm.properties /conf/vlm.properties
 COPY conf/vlm-default.properties /conf/vlm-default.properties
 COPY conf/logging-default.properties /conf/logging-default.properties
