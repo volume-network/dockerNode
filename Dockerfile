@@ -9,4 +9,4 @@ COPY conf/vlm.properties /conf/vlm.properties
 COPY conf/vlm-default.properties /conf/vlm-default.properties
 COPY conf/logging-default.properties /conf/logging-default.properties
 EXPOSE 8125 8123 8121
-ENTRYPOINT ["java", "-cp", "/app/volume.jar:/conf", "vlm.Volume", "-pass"]
+ENTRYPOINT ["java", "-cp", "/app/volume.jar:/conf", "vlm.Volume"]
