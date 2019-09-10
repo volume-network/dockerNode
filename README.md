@@ -31,18 +31,14 @@
 
 - 是否打开APIServer(以及grpc版本的APIServer)（原则上不用改）
 
-	# Accept http/json API requests.
+	
 	API.Server = on
-
-	# Accept gRPC API requests.
 	API.V2.Server = on
 
 - APIServer的监听端口（以及grpc版本的APIServer）（原则上不用改）
 
-	# Port for http/json API requests.
-	API.Port = 8125
 
-	# Port for gRPC API requests
+	API.Port = 8125
 	API.V2.Port = 8123
  
 - DB连接字符串(按照实际配置情况修改，参考下面DB配置章节)
@@ -166,7 +162,6 @@ ubuntu 为例：
 	DB.Url=jdbc:mariadb://localhost:3306/vml_master
 	DB.Username=vlm_user
 	DB.Password=volume
-
 
 ### 启动和守护进程
 
