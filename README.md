@@ -17,7 +17,7 @@
 
 	P2P.Port = 8121
 
-- 矿池节点的Listen地址（原则行不用改）
+- 矿池节点的Listen地址（原则上不用改）
 
 	P2P.Listen = 0.0.0.0
 
@@ -31,12 +31,10 @@
 
 - 是否打开APIServer(以及grpc版本的APIServer)（原则上不用改）
 
-	
 	API.Server = on
 	API.V2.Server = on
 
 - APIServer的监听端口（以及grpc版本的APIServer）（原则上不用改）
-
 
 	API.Port = 8125
 	API.V2.Port = 8123
@@ -51,7 +49,6 @@
 
 	vlm.MinePool.passphase = 
 	vlm.MinePool.PublicList = 
-
 
 ## Docker方式布署
 
@@ -143,6 +140,11 @@ Password请对应修改create.sql中的password，并妥善保存。
 
 	docker run -it -p 8123:8123 -p 8125:8125 -p 8121:8121 vol java /app/volume.jar:/conf vlm.Volume 
 
+
+### 一键安装脚本
+
+	tar zxvf vol.tar.gz 
+	cd volume && sh install.sh
 
 ## 本地方式部署
 	
