@@ -122,11 +122,20 @@ ubuntu 为例：
 	
 数据库文件映射到本地地址/data/db/mariadb，防止镜像问题导致数据库丢失，同时可以多镜像共享一个db，MYSQL_ROOT_PASSWORD 需要设置为mysql的root实际密码，请妥善保存。
 
+配置和增加db用户，以及创建数据库schema：
+
+	docker exec -i voldb mysql -uroot -pvolume <create.sql
+
+	docker exec -i voldb mysql -uroot -pvolume -Dvlm_master < init-mysql.sql
+	
+
 这种方式下，因为db是跑在docker中的，需要改动下db配置，如下:
 
 	DB.Url=jdbc:mariadb://172.17.0.1:3306/vml_master
 	DB.Username=vlm_user
 	DB.Password=volume
+
+Password请对应修改create.sql中的password，并妥善保存。
 
 ### 镜像启动
 	
