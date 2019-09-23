@@ -2,7 +2,9 @@
 
 ## 节点下载
 
-	wget https://github.com/volume-network/dockerNode/blob/master/vol.tar.gz
+	
+	https://github.com/volume-network/testnet/releases/tag/v0.1.1
+	下载vol.tar.gz
 
 ## 配置文件
 	
@@ -48,7 +50,7 @@
 - 矿池SecPass和PublicKey列表（按照实际情况修改）
 
 	vlm.MinePool.passphase = 
-	vlm.MinePool.PublicList = 
+	vlm.MinePool.PublicList = 官方提供
 
 ## Docker方式布署
 
@@ -70,7 +72,7 @@ ubuntu 为例：
 ### 镜像构建
 
 	tar zxvf vol.tar.gz 
-	cd volume && sudo docker build -f Dockerfile -t vol .
+	cd volume &&  docker build -f Dockerfile -t vol .
 
 如果创建成功可以看到如下：
 	
@@ -110,12 +112,12 @@ ubuntu 为例：
 
 ### db安装
 
-	mkdir -p /data/db/mariadb && 
-	sudo docker run --name voldb\
+	 mkdir -p /data/db/mariadb && 
+	 docker run --name voldb\
 	    -p 3306:3306 \
 	    -v /data/db/mariadb:/var/lib/mysql \
 	    -e MYSQL_ROOT_PASSWORD=volume \
-	    -d mariadb:10.1
+	    -d mariadb:latest
 	
 数据库文件映射到本地地址/data/db/mariadb，防止镜像问题导致数据库丢失，同时可以多镜像共享一个db，MYSQL_ROOT_PASSWORD 需要设置为mysql的root实际密码，请妥善保存。
 
@@ -138,7 +140,7 @@ Password请对应修改create.sql中的password，并妥善保存。
 	
 镜像构建成功后，我们通过docker来运行当前镜像，并暴露对外端口
 
-	docker run -it -p 8123:8123 -p 8125:8125 -p 8121:8121 vol java /app/volume.jar:/conf vlm.Volume 
+	docker run -d -p 8123:8123 -p 8125:8125 -p 8121:8121 vol java /app/volume.jar:/conf vlm.Volume 
 
 
 ### 一键安装脚本
