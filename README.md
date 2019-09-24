@@ -3,8 +3,7 @@
 ## 节点下载
 
 	
-	https://github.com/volume-network/testnet/releases/tag/v0.1.1
-	下载vol.tar.gz
+	https://github.com/volume-network/dockerNode/releases/tag/1.0
 
 ## 配置文件
 	
@@ -71,8 +70,8 @@ ubuntu 为例：
 
 ### 镜像构建
 
-	tar zxvf vol.tar.gz 
-	cd volume &&  docker build -f Dockerfile -t vol .
+	tar zxvf dockerNode-1.0.tar.gz
+	cd dockerNode-1.0 &&  docker build -f Dockerfile -t vol .
 
 如果创建成功可以看到如下：
 	
