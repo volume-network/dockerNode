@@ -71,7 +71,7 @@ ubuntu 为例：
 ### 镜像构建
 
 	tar zxvf dockerNode-1.0.tar.gz
-	cd dockerNode-1.0 &&  docker build -f Dockerfile -t vol .
+	cd dockerNode-1.0.tar.gz &&  docker build -f Dockerfile -t vol .
 
 如果创建成功可以看到如下：
 	
