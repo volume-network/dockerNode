@@ -16,7 +16,7 @@
 
 - 矿池节点之间的通信端口（原则上不用改）
 
-	P2P.Port = 8121
+	P2P.Port = 9121
 
 - 矿池节点的Listen地址（原则上不用改）
 
@@ -24,21 +24,19 @@
 
 - 启动时的种子节点（由官方提供）
 
-	P2P.BootstrapPeers = 47.93.254.196:8121
+	P2P.BootstrapPeers = 47.93.254.196:9121
 
 - APISever的Listen地址(原则上不用改)
 
 	API.Listen = 0.0.0.0
 
-- 是否打开APIServer(以及grpc版本的APIServer)（原则上不用改）
+- 是否打开APIServer（原则上不用改）
 
 	API.Server = on
-	API.V2.Server = on
 
-- APIServer的监听端口（以及grpc版本的APIServer）（原则上不用改）
+- APIServer的监听端口（原则上不用改）
 
-	API.Port = 8125
-	API.V2.Port = 8123
+	API.Port = 9121
  
 - DB连接字符串(按照实际配置情况修改，参考下面DB配置章节)
 
@@ -139,7 +137,7 @@ Password请对应修改create.sql中的password，并妥善保存。
 	
 镜像构建成功后，我们通过docker来运行当前镜像，并暴露对外端口
 
-	docker run -d -p 8123:8123 -p 8125:8125 -p 8121:8121 vol java /app/volume.jar:/conf vlm.Volume 
+	docker run -d -p 9123:9123 -p 9121:8125 -p 9121:9121 vol java /app/volume.jar:/conf vlm.Volume 
 
 
 ### 一键安装脚本
@@ -186,4 +184,4 @@ Password请对应修改create.sql中的password，并妥善保存。
 
 ## 管理界面
 
-矿池管理界面可以通过 http://your-ip:8125/来访问，如果不能访问请检查ip-tables等配置。
+矿池管理界面可以通过 http://your-ip:9121/来访问，如果不能访问请检查ip-tables等配置。
