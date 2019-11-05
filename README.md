@@ -36,7 +36,7 @@
 
 - APIServer的监听端口（原则上不用改）
 
-	API.Port = 9121
+	API.Port = 9125
  
 - DB连接字符串(按照实际配置情况修改，参考下面DB配置章节)
 
@@ -137,7 +137,7 @@ Password请对应修改create.sql中的password，并妥善保存。
 	
 镜像构建成功后，我们通过docker来运行当前镜像，并暴露对外端口
 
-	docker run -d -p 9123:9123 -p 9121:8125 -p 9121:9121 vol java /app/volume.jar:/conf vlm.Volume 
+	docker run -d -p 9125:9125 -p 9121:9121 vol java /app/volume.jar:/conf vlm.Volume 
 
 
 ### 一键安装脚本
@@ -184,4 +184,4 @@ Password请对应修改create.sql中的password，并妥善保存。
 
 ## 管理界面
 
-矿池管理界面可以通过 http://your-ip:9121/来访问，如果不能访问请检查ip-tables等配置。
+矿池管理界面可以通过 http://your-ip:9125/来访问，如果不能访问请检查ip-tables等配置。
