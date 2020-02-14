@@ -62,6 +62,11 @@ ubuntu 为例：
 
 ### 使用Docker一键部署VolumeNode脚本
 
+首先切换到root账户
+```
+sudo su
+```
+
 参考install.sh
 ```
 set -o nounset                              # Treat unset variables as an error
