@@ -94,7 +94,20 @@ docker run --name volapp -it -p 9125:9125 -p 9121:9121 --link voldb volapp
 vlm.services.impl.BlockServiceImpl - block:[240->7955705824301042033], tiny:[0], totalReward:[0], foundationReward:[0], poolReward:[0], minerReward:[0], mateRewardAll:[0]
 ```
 
-表明正在同步区块
+表明正在同步区块。
+
+按键盘ctrl+p，然后按ctrl+q，使docker转入到后台运行。
+
+使用以下命令来查看正在运行得docker容器
+```
+docker ps -a
+```
+
+使用以下命令来链接到正在运行的docker容器
+```
+docker attach <container_id>
+```
+
 
 ### 数据文件
 	
