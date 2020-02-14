@@ -19,15 +19,17 @@
 
 set -o nounset                              # Treat unset variables as an error
 
-docker build -f Dockerfile -t vol .
+docker pull mariadb
 
-mkdir -p /tmp/db/mariadb &&
-     docker run --name voldb\
+docker build -f Dockerfile -t volapp .
+
+mkdir -p /tmp/db/mariadb
+
+docker run --name voldb\
     -p 3306:3306 \
     -v /tmp/db/mariadb:/var/lib/mysql \
     -e MYSQL_ROOT_PASSWORD=volume \
     -d mariadb:latest
-echo "waiting database to start"
 
 sleep 60
 
@@ -35,5 +37,6 @@ docker exec -i voldb mysql -uroot -pvolume < create.sql
 
 docker exec -i voldb mysql -uroot -pvolume -Dvlm_master < init-mysql.sql
 
-docker run -d  -p 9125:9125 -p 9121:9121 vol java /app/volume.jar:/conf vlm.Volume
+docker run --name volapp -it -p 9125:9125 -p 9121:9121 --link voldb volapp
+
 

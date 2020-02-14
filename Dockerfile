@@ -1,5 +1,4 @@
 FROM openjdk:8-jre-alpine
-RUN apk update && apk upgrade && apk add --no-cache bash
 
 VOLUME ["/conf"]
 WORKDIR /app
