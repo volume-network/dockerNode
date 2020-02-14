@@ -98,7 +98,7 @@ vlm.services.impl.BlockServiceImpl - block:[240->7955705824301042033], tiny:[0],
 
 按键盘ctrl+p，然后按ctrl+q，使docker转入到后台运行。
 
-使用以下命令来查看正在运行得docker容器
+使用以下命令来查看正在运行的docker容器
 ```
 docker ps -a
 ```
