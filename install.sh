@@ -23,20 +23,15 @@ docker pull mariadb
 
 docker build -f Dockerfile -t volapp .
 
-mkdir -p /tmp/db/mariadb
+docker run --name voldb -p 3306:3306 -e MYSQL_ROOT_PASSWORD=volume -d mariadb:latest
 
-docker run --name voldb\
-    -p 3306:3306 \
-    -v /tmp/db/mariadb:/var/lib/mysql \
-    -e MYSQL_ROOT_PASSWORD=volume \
-    -d mariadb:latest
+echo Wait for mariadb 180 sec
 
-sleep 60
+sleep 180
 
 docker exec -i voldb mysql -uroot -pvolume < create.sql
 
 docker exec -i voldb mysql -uroot -pvolume -Dvlm_master < init-mysql.sql
 
 docker run --name volapp -it -p 9125:9125 -p 9121:9121 --link voldb volapp
-
 
