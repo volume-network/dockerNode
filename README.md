@@ -35,7 +35,9 @@
 - DB连接字符串(按照实际配置情况修改)
 
 	DB.Url=jdbc:mariadb://172.17.0.1:3306/vlm_master
+	
 	DB.Username=vlm_user
+	
 	DB.Password=volume
 
 - 矿池SecPass和PublicKey列表（按照实际情况修改）
